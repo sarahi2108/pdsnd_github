@@ -230,7 +230,7 @@ def main():
 
         display_raw_bikeshare_data(df)
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        restart = input('\nWould you like to start over? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
 
