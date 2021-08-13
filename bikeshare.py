@@ -29,7 +29,7 @@ def get_filters():
         else:
             print("Please make a valid entry")
     # get user input for month (all, january, february, ... , june)
-    while True:    
+    while True:
         month = input("Please select a month from January to June or type all")
         month = month.lower()
         if month in ['january', 'february', 'march', 'april', 'may', 'june', 'all']:
@@ -70,19 +70,19 @@ def load_data(city, month, day):
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.day_name
 
-    
+
     if month != 'all':
-   	 	
+
         months = ['January', 'February', 'March', 'April', 'May', 'June']
         month = months.index(month) + 1
 
-    
+
         df = df[df['month'] == month]
 
-      
+
     if day != 'all':
-     
-        df = df[df['day_of_week'] == day.title()]
+
+        df = df[df['day_of_the_week'] == day.title()]
 
     return df
 
@@ -96,7 +96,7 @@ def time_stats(df):
     print("The most common month is ", df['month'].mode()[0], "\n")
 
     # display the most common day of week
-    print("The most common day   is ", df['day_of_week'].mode()[0], "\n")
+    print("The most common day   is ", df['day_of_the_week'].mode()[0], "\n")
 
     # display the most common start hour
     df['hour'] = df['Start Time'].dt.hour
@@ -137,7 +137,7 @@ def station_stats(df):
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
-    
+
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
@@ -175,14 +175,14 @@ def user_stats(df):
     # TO DO: Display earliest, most recent, and most common year of birth
 
     try:
-      Earliest_Year = df['Birth Year'].min()
-      print('\nEarliest Year is :', Earliest_Year)
+      Earliest_Birth_Year = df['Birth Year'].min()
+      print('\nEarliest Year is :', Earliest_Birth_Year)
     except KeyError:
       print("\nEarliest Year :\nNo data available for this month.")
 
     try:
-      Most_Recent_Year = df['Birth Year'].max()
-      print('\nMost Recent Year:', Most_Recent_Year)
+      Most_Recent_Birth_Year = df['Birth Year'].max()
+      print('\nMost Recent Year:', Most_Recent_Birth_Year)
     except KeyError:
       print("\nMost Recent Year:\nNo data available for this month.")
 
@@ -194,41 +194,41 @@ def user_stats(df):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
-def display_data(df):
+
+def display_raw_bikeshare_data(df):
     """Displays raw bikeshare data."""
     row_length = df.shape[0]
 
     # iterate from 0 to the number of rows in steps of 5
     for i in range(0, row_length, 5):
-        
+
         yes = input('\nWould you like to view the relevant  data for the entries you made ? Type \'yes\' or \'no\'\n> ')
         if yes.lower() != 'yes':
             break
-        
+
         row_data = df.iloc[i: i + 5]
         for row in row_data:
-           
+
             print(row)
 
-            
-            
+
+
 
 def main():
-    
+
     while True:
-        
+
         city, month, day = get_filters()
         df = load_data(city, month, day)
-        
-        
+
+
 
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        
-        display_data(df)
+
+        display_raw_bikeshare_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
