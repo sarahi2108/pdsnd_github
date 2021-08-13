@@ -68,7 +68,7 @@ def load_data(city, month, day):
 
 
     df['month'] = df['Start Time'].dt.month
-    df['day_of_week'] = df['Start Time'].dt.day_name
+    df['day_of_the_week'] = df['Start Time'].dt.day_name
 
 
     if month != 'all':
@@ -187,8 +187,8 @@ def user_stats(df):
       print("\nMost Recent Year:\nNo data available for this month.")
 
     try:
-      Most_Common_Year = df['Birth Year'].value_counts().idxmax()
-      print('\nMost Common Year is :', Most_Common_Year)
+      Most_Common_Birth_Year = df['Birth Year'].value_counts().idxmax()
+      print('\nMost Common Year is :', Most_Common_Birth_Year)
     except KeyError:
       print("\nMost Common Year:\nNo data available for this month.")
 
