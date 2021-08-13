@@ -1,4 +1,4 @@
-Created By Sarah Ilyas		
+	
 	
 Explore US Bikeshare Data 
 
@@ -29,6 +29,8 @@ What are the counts of each user type?
 What are the counts of gender?
 What is the earliest birth year, most recent birth year, and most common birth year?
 
+A case in point of the user interactive screen 
+ 
 
 
 ### Credits

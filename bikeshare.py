@@ -29,7 +29,7 @@ def get_filters():
         else:
             print("Please make a valid entry")
     # get user input for month (all, january, february, ... , june)
-    while True:    
+    while True:
         month = input("Please select a month from January to June or type all")
         month = month.lower()
         if month in ['january', 'february', 'march', 'april', 'may', 'june', 'all']:
@@ -70,18 +70,18 @@ def load_data(city, month, day):
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.day_name
 
-    
+
     if month != 'all':
-   	 	
+
         months = ['January', 'February', 'March', 'April', 'May', 'June']
         month = months.index(month) + 1
 
-    
+
         df = df[df['month'] == month]
 
-      
+
     if day != 'all':
-     
+
         df = df[df['day_of_week'] == day.title()]
 
     return df
@@ -137,7 +137,7 @@ def station_stats(df):
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
-    
+
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
@@ -194,40 +194,41 @@ def user_stats(df):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+
 def display_data(df):
     """Displays raw bikeshare data."""
     row_length = df.shape[0]
 
     # iterate from 0 to the number of rows in steps of 5
+    #This part of the code allows the user to decide if he/she wants to proceed with viewing the filtered data relevant to the entries made
     for i in range(0, row_length, 5):
-        
+
         yes = input('\nWould you like to view the relevant  data for the entries you made ? Type \'yes\' or \'no\'\n> ')
         if yes.lower() != 'yes':
             break
-        
+
         row_data = df.iloc[i: i + 5]
         for row in row_data:
-           
+
             print(row)
 
-            
-            
+
+
 
 def main():
-    
+
     while True:
-        
+
         city, month, day = get_filters()
         df = load_data(city, month, day)
-        
-        
+
+
 
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        
+
         display_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
